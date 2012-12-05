@@ -1,0 +1,28 @@
+{
+  "name": "Sugar.ls",
+  "version": "0.6.0",
+  "description": "Sugar.ls is Sugar.js written in LiveScript for showcasing",
+  "keywords": [
+    "livescript",
+    "ls",
+    "sugar",
+    "sugar.js",
+    "javascript"
+  ],
+  "author": "Vendethiel <nami.d0c.0@gmail.com>",
+  "homepage": "http://github.com/nami-doc/sugar.ls/",
+  "bugs": "http://github.com/nami-doc/sugar.ls/",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nami-doc/sugar.ls.git"
+  },
+  "dependencies": {
+    "LiveScript": "~1.1",
+    "prelude-ls": "~0.6",
+    "uglify-js": "~2.2",
+    "assert": "*"
+  }
+}

@@ -6,12 +6,16 @@ Array::<<<
 		| 'RegExp'   => [return elem for elem in @ when it.exec elem]
 		| otherwise  => [return elem for elem in @ when it is elem]
 
+	detect: -> @find it
+
 	#sugar:find-all
 	keep-if: ->
 		switch typeof! it
 		| 'Function' => [elem for elem in @ when it elem]
 		| 'RegExp'   => [elem for elem in @ when it.exec elem]
 		| otherwise  => [elem for elem in @ when it is elem]
+
+	grep: -> @keep-if it
 
 	find-index: ->
 		switch typeof! it
@@ -48,7 +52,13 @@ Array::<<<
 
 	clone: -> []concat @
 
-	unique: -> unique @
+	#sugar:unique
+	uniq: -> unique @
+
+	uniq-by: ->
+		has = []
+
+		[(has.push f; v) for v in @ when (f = it v) not in has]uniq!
 
 	flatten: ->
 		flat = []
@@ -61,10 +71,11 @@ Array::<<<
 
 		flat
 
+	#ruby:|
 	union: (...arrays) ->
 		arr = @clone!
 		for array in arrays then arr .= concat array
-		arr.unique!
+		arr.uniq!
 
 	intersect: (...arrays) ->
 		arr = []
@@ -104,7 +115,7 @@ Array::<<<
 	at: ->
 		l = @length
 
-		unless &1?
+		if &length is 0
 			return @[if it < 0 then l + it else it]
 
 		[@[if i < 0 then l + i else i] for i in &]
@@ -126,7 +137,11 @@ Array::<<<
 
 	drop-while: -> drop-while it, @
 
-	#ruby:include?
+	take-while: -> take-while it, @
+
+	all: -> all it, @
+
+	#ruby:alias :include?
 	any: -> any it, @
 
 	to: -> @slice 0 it ? @length
@@ -134,6 +149,8 @@ Array::<<<
 	min: -> fold1 (<?), @
 
 	max: -> fold1 (>?), @
+
+	size: -> @length
 
 	#todo
 	least: ->
@@ -154,7 +171,7 @@ Array::<<<
 		group = []
 		len = @length
 
-		if num >= len
+		if len is num
 			return [@]
 
 		i = 0
@@ -166,7 +183,7 @@ Array::<<<
 				group = []
 
 		if group.length
-			if &1?
+			if &length > 1
 				#fill
 				add = abs (i % num) - num
 				i = 0
@@ -177,13 +194,15 @@ Array::<<<
 
 		ret
 
-	rotate: ->
+	each-slice: (num, fn) -> @in-groups-of num .each fn
+
+	rotate: (it = 1) ->
 		i = 0
 		len = @length
-		while i < it, ++i
-			i -= len if i > len
+		while i < len, ++i
+			it = 0 if it >= len
 
-			@[i]
+			@[it++]
 
 	is-empty: -> !@compact!length
 
@@ -191,8 +210,14 @@ Array::<<<
 
 	to: -> @slice 0 it ? @length
 
+	take: -> @to it
+
+	#sugar: only (`sort` in Ruby)
 	sort-by: (f) ->
 		sort-by (if typeof! f is 'Function' then f else -> it[f]), @
+
+	#wait, what ?
+	to-query: -> ["#it[]=#{encodeURIComponent v}" for v, k in @] * '&'
 
 	randomize: ->
 		{length: len}:arr = @clone!
@@ -221,7 +246,9 @@ Array::<<<
 	#sugar:map
 	collect: -> map it, @
 
-	each: !-> each it, @
+	each: !-> [it v, k for v, k in @]
+
+	each-with-index: !-> @each it
 
 	each-index: !-> each it, @keys!
 

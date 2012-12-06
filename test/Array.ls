@@ -2,7 +2,7 @@ a = [1 to 5]
 
 equal 1 a.find (% 2)
 
-eq [1 2] a.find-all (< 3)
+eq [1 2] a.keep-if (< 3)
 
 equal 1 a.find-index (== 2)
 
@@ -12,23 +12,22 @@ equal 5 a.count!
 
 equal 3 a.count (> 2)
 
-eq [1 3 4 5] a.clone!remove-at 1
+eq [1 3 4 5] a.clone!delete-at 1
 
-eq [1 4 5] a.clone!remove-at 1 2
+eq [1 4 5] a.clone!delete-at 1 2
 
-#tests add
-eq [1 to 6] a.include 6
+eq [1 to 6] a.clone!insert 6 6
 
-eq [1 to 8] a.include [6 to 8]
+eq [1 to 8] a.clone!insert 6 [6 to 8]
 
-#tests remove
-eq [1 2 3] a.exclude 4 5
+#tests delete
+eq [1 2 3] a.reject 4 5
 
-eq [1 2 3] a.exclude (> 3)
+eq [1 2 3] a.reject (> 3)
 
-eq <[a b c e]> <[a b c d e]>exclude /d/
+eq <[a b c e]> <[a b c d e]>reject /d/
 
-eq <[a b c e]> <[a b c d e]>exclude 'd'
+eq <[a b c e]> <[a b c d e]>reject 'd'
 
 eq a, a.clone!
 
@@ -41,6 +40,8 @@ eq [1 2 3 4] [1 2]union [2 3] [3 4]
 eq <[b]> <[a b]>intersect <[b c]> ['a' to 'e']
 
 eq <[a e]> ['a' to 'f']subtract <[b c d]> <[f]>
+
+eq [2 4 6 2 4 6] [1 2 3]cycle 6 (* 2)
 
 equal 1 a.at 0
 
@@ -57,6 +58,10 @@ eq [1 2] a.first 2
 equal 5 a.last!
 
 eq [4 5] a.last 2
+
+eq [3 4 5] a.from 2
+
+eq [1 2] a.to 2
 
 equal 1 a.min!
 
@@ -75,6 +80,8 @@ eq [[1 2 3] [4 5]] a.in-groups-of 3
 eq [[1 2 3] [4 5 0]] a.in-groups-of 3 0
 
 eq [[1 2 3 4] [5 '?' '?' '?']] a.in-groups-of 4 '?'
+
+console.log [1 2 3]rotate 2
 
 #tests compact
 equal true []is-empty!
@@ -103,11 +110,21 @@ equal 3 a.sample(3)length
 
 #console.log a.sample!
 
+eq [2 4 6] [1 2 3]collect (* 2)
+
 i = 0
-a.each -> ++i
-equal 5 i
+[1 2 3]each -> i += it
+equal 6 i
+
+i = 0
+[1 2 3]each-index -> i += Number it
+equal 3 i
 
 eq {2: ['he' 'ya'] 4: ['heya']} <[he ya heya]>group-by 'length'
 
 eq {13: [age: 15 name: 'Paul'; age: 15 name: 'Marc'] 18: [age: 20 name: 'Pierre']},
 	[{age: 15 name: 'Paul'} {age: 15 name: 'Marc'} {age: 20 name: 'Pierre'}]group-by (.age - 2)
+
+#using prelude.ls :
+# * any
+# * drop-while

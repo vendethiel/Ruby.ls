@@ -1,23 +1,24 @@
 {
-  "name": "sugar.ls",
+  "name": "ruby.ls",
   "version": "0.6.0",
-  "description": "Sugar.ls is Sugar.js written in LiveScript for showcasing",
+  "description": "Ruby.ls is Ruby's stdlib (for primitive types) written in LiveScript for showcasing",
   "keywords": [
     "livescript",
     "ls",
-    "sugar",
-    "sugar.js",
+    "ruby",
+    "ruby.js",
+    "ruby.ls",
     "javascript"
   ],
   "author": "Vendethiel <nami.d0c.0@gmail.com>",
-  "homepage": "http://github.com/nami-doc/sugar.ls/",
-  "bugs": "http://github.com/nami-doc/sugar.ls/",
+  "homepage": "http://github.com/nami-doc/ruby.ls/",
+  "bugs": "http://github.com/nami-doc/ruby.ls/",
   "engines": {
     "node": ">= 0.8.0"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/nami-doc/sugar.ls.git"
+    "url": "git://github.com/nami-doc/ruby.ls.git"
   },
   "dependencies": {
     "LiveScript": "~1.1",

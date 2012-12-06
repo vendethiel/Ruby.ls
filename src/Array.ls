@@ -1,11 +1,13 @@
 Array::<<<
 	find: ->
+		#this pattern (argument-type switched) is used in this document to 
 		switch typeof! it
 		| 'Function' => [return elem for elem in @ when it elem]
 		| 'RegExp'   => [return elem for elem in @ when it.exec elem]
 		| otherwise  => [return elem for elem in @ when it is elem]
 
-	find-all: ->
+	#sugar:find-all
+	keep-if: ->
 		switch typeof! it
 		| 'Function' => [elem for elem in @ when it elem]
 		| 'RegExp'   => [elem for elem in @ when it.exec elem]
@@ -26,9 +28,10 @@ Array::<<<
 	count: ->
 		return @length unless it?
 
-		@find-all it .length
+		@keep-if it .length
 
-	remove-at: (start, end) ->
+	#sugar:remove-at
+	delete-at: (start, end) ->
 		return @ unless start?
 		end = start unless end?
 
@@ -36,9 +39,12 @@ Array::<<<
 
 		@
 
-	include: (el, idx) -> @clone!add el, idx
+	delete-if: -> @delete-at ...
 
-	exclude: -> @clone!remove ...&
+#	include: (el, idx) -> @clone!insert idx, el
+
+	#sugar:exclude
+	reject: -> @clone!delete ...&
 
 	clone: -> []concat @
 
@@ -69,6 +75,7 @@ Array::<<<
 			for array in arrays
 				++i if elem in array
 
+			#present in every array
 			arr.push elem if i is l
 
 		arr
@@ -84,6 +91,15 @@ Array::<<<
 			arr.push elem
 
 		arr
+
+	reverse-each: -> @reverse!each ...
+
+	cycle: (num, f) ->
+		i = 0
+		len = @length
+
+		while i < num, ++i
+			f @[i % len]
 
 	at: ->
 		l = @length
@@ -105,13 +121,25 @@ Array::<<<
 		else
 			@[*-1]
 
+	#sugar:from
+	drop: -> @slice it
+
+	drop-while: -> drop-while it, @
+
+	#ruby:include?
+	any: -> any it, @
+
+	to: -> @slice 0 it ? @length
+
 	min: -> fold1 (<?), @
 
 	max: -> fold1 (>?), @
 
+	#todo
 	least: ->
 		console.log @group-by it ? 'length'
 
+	#todo
 	most: ->
 		console.log @group-by it ? 'length'
 
@@ -138,7 +166,7 @@ Array::<<<
 				group = []
 
 		if group.length
-			if arguments.length > 1
+			if &1?
 				#fill
 				add = abs (i % num) - num
 				i = 0
@@ -149,13 +177,25 @@ Array::<<<
 
 		ret
 
+	rotate: ->
+		i = 0
+		len = @length
+		while i < it, ++i
+			i -= len if i > len
+
+			@[i]
+
 	is-empty: -> !@compact!length
+
+	from: -> @slice it
+
+	to: -> @slice 0 it ? @length
 
 	sort-by: (f) ->
 		sort-by (if typeof! f is 'Function' then f else -> it[f]), @
 
 	randomize: ->
-		{length: len}:arr = @concat!
+		{length: len}:arr = @clone!
 
 		var j, x
 		while len
@@ -167,8 +207,7 @@ Array::<<<
 		arr
 
 	sample: ->
-		if arguments.length
-			@randomize!slice 0 it
+		if &0? then @randomize!slice 0 it
 		else @randomize!0
 
 	zip: (...arrays) ->
@@ -179,14 +218,31 @@ Array::<<<
 				if array[k]
 					that
 
-	each: -> each it, @
+	#sugar:map
+	collect: -> map it, @
 
-	add: (el, idx) ->
-		idx = @length unless idx?
+	each: !-> each it, @
+
+	each-index: !-> each it, @keys!
+
+	keys: -> [k for own k of @]
+
+	fill: ->
+		i = 0
+		len = @length
+
+		while i < len, ++i
+			@[i] = it
+
+		@
+
+	#sugar: inverted arguments
+	insert: (idx, el) ->
 		@splice ...[idx, 0]concat el
 		@
 
-	remove: (...vals) ->
+	#sugar:remove
+	delete: (...vals) ->
 		arr = @clone!
 
 		for value in vals

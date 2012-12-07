@@ -1,12 +1,11 @@
 Number::<<<
-	times: (fn) ->
-		for i to (@ - 1) then fn(i)
+	times: (fn) -> for i from 1 to @ then fn(i)
 	
 	is-multiple-of: (num) -> @ % num === 0
 	
-	is-even: -> @is-multiple-of 2
+	is-even: -> @ % 2 == 0
 	
-	is-odd: -> !@is-multiple-of 2
+	is-odd: -> @ % 2 != 0
 	
 	is-integer: -> @ % 1 == 0
 	

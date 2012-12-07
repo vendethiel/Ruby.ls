@@ -1,8 +1,7 @@
 
-# Number.times
-output = []
-3.times (i) -> output.push i
-eq [0, 1, 2] output
+i = 0
+3.times -> i += 1
+eq 3 i
 
 equal true 8.is-multiple-of 4
 equal false 8.is-multiple-of 3

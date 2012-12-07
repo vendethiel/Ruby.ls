@@ -1,7 +1,7 @@
 Number::<<<
 	times: (fn) -> for i from 1 to @ then fn(i)
 	
-	is-multiple-of: (num) -> @ % num === 0
+	is-multiple-of: (num) -> @ % num == 0
 	
 	is-even: -> @ % 2 == 0
 	
@@ -27,3 +27,14 @@ Number::<<<
 	
 	upto: -> [Number @ to it]
 	downto: -> [it to Number @].reverse!
+	
+	to-base: (base) ->
+		result = 0
+		remainder = @
+		while remainder > 0
+			power = Math.floor(Math.log(remainder) / Math.log(base))
+			q = base ** power
+			n = Math.floor(remainder / q)
+			result += n * 10 ** power
+			remainder -= n * q
+		result

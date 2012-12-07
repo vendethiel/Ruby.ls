@@ -23,3 +23,6 @@ equal 1 Math.E.ln!
 
 eq [3, 4, 5] 3.upto(5)
 eq [10, 9, 8] 10.downto(8)
+
+equal 1210 100.to-base 4
+equal 1010 10.to-base 2

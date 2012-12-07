@@ -8,6 +8,8 @@ Number::<<<
 	is-odd: -> @ % 2 != 0
 	
 	is-integer: -> @ % 1 == 0
+
+	abs: -> Math.abs @
 	
 	round: ->
 		mul = 10 ** (it ? 0)
@@ -26,7 +28,8 @@ Number::<<<
 	ln: -> ln @
 	
 	upto: -> [Number @ to it]
-	downto: -> [it to Number @].reverse!
+
+	downto: -> [Number @ to it by -1]
 	
 	to-base: (base) ->
 		result = 0

@@ -26,3 +26,8 @@ eq [10, 9, 8] 10.downto(8)
 
 equal 1210 100.to-base 4
 equal 1010 10.to-base 2
+
+eq 1 (Math.PI / 4).tan!
+eq undefined (Math.PI / 2).tan!
+
+eq undefined (Math.PI).cot!

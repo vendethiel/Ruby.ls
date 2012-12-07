@@ -38,3 +38,36 @@ Number::<<<
 			result += n * 10 ** power
 			remainder -= n * q
 		result
+		
+	# Trigonometric functions
+	sin: ->
+		if @ === 0 or @ === Math.PI
+			return 0
+		if @ === Math.PI / 2 or @ === Math.PI * 3/2
+			return 1
+		Math.sin @
+	
+	cos: ->
+		if @ === 0 or @ === Math.PI
+			return 1
+		if @ === Math.PI / 2 or @ === Math.PI * 3/2
+			return 0
+		Math.cos @
+	
+	tan: ->
+		if @ === (Math.PI / 4) or @ === (Math.PI * 5/4)
+			return 1
+		if @ === (Math.PI / 3/4) or @ === (Math.PI * 7/4)
+			return -1
+		if @ === (Math.PI / 2) or @ === (Math.PI * 3/2)
+			return undefined
+		Math.tan @
+		
+	cot: ->
+		if @ === (Math.PI / 4) or @ === (Math.PI * 5/4)
+			return 1
+		if @ === (Math.PI / 3/4) or @ === (Math.PI * 7/4)
+			return -1
+		if @ === (Math.PI) or @ === 0
+			return undefined
+		Math.cot @

@@ -66,3 +66,47 @@ Number::<<<
 		| otherwise => Math.cot @
 
 	chr: -> String.from-char-code @
+
+	format: (pre, thousands = ' ', decimals = ',') ->
+		[int, frac] = "#@" / '.'
+
+		result = ""
+		i = int.length
+		while i > 0, i -= 3
+			if i < int.length
+				result = thousands + result
+
+			result = int.slice(Math.max 0 i - 3; i) + result
+
+		if frac?
+			result += decimals + frac
+
+			if "#frac"length < pre
+				i = 0
+				result += "0" * (pre - "#frac"length)
+
+		result
+
+	abbr: ->
+		str = 'kmbt'
+		mid = 0
+		limit = 4
+
+		fixed = @to-fixed 20
+		decimal-place = fixed.search /\./
+		numeral-place = fixed.search /[1-9]/
+		significant = decimal-place - numeral-place
+		var unit, i, divisor
+		if significant > 0
+			significant -= 1
+		
+		i = Math.max Math.min((significant / 3)floor!, if limit is false then str.length else limit), -mid
+		unit = str.charAt i + mid - 1
+		console.log unit
+		if significant < -9 
+			i = -3
+			it = significant.abs! - 9
+			unit = str.slice 0 1
+		
+		divisor = if bytes? then 2 ** (i * 10) else 10 ** (i * 3)
+		return (@ / divisor)round(it || 0)format! + unit.trim!

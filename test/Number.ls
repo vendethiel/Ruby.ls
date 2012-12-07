@@ -33,3 +33,7 @@ equal undefined (Math.PI / 2)tan!
 equal undefined (Math.PI)cot!
 
 equal 'Z' 90.chr!
+
+eq '5 000' 5000.format!
+
+eq '3m' 3_000_000.abbr!

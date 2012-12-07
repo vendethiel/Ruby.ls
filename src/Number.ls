@@ -41,33 +41,23 @@ Number::<<<
 		
 	# Trigonometric functions
 	sin: ->
-		if @ === 0 or @ === Math.PI
-			return 0
-		if @ === Math.PI / 2 or @ === Math.PI * 3/2
-			return 1
-		Math.sin @
+		| @ in [0 Math.PI] => 0
+		| @ in [Math.PI / 2, Math.PI * 3/2] => 1
+		| otherwise => Math.sin @
 	
 	cos: ->
-		if @ === 0 or @ === Math.PI
-			return 1
-		if @ === Math.PI / 2 or @ === Math.PI * 3/2
-			return 0
-		Math.cos @
+		| @ in [0 Math.PI] => 1
+		| @ in [Math.PI / 2, Math.PI * 3/2] => 0
+		| otherwise => Math.cos @
 	
 	tan: ->
-		if @ === (Math.PI / 4) or @ === (Math.PI * 5/4)
-			return 1
-		if @ === (Math.PI / 3/4) or @ === (Math.PI * 7/4)
-			return -1
-		if @ === (Math.PI / 2) or @ === (Math.PI * 3/2)
-			return undefined
-		Math.tan @
+		| @ in [Math.PI / 4, Math.PI * 5/4] => 1
+		| @ in [Math.PI / 3/4, Math.PI*7/4] => -1
+		| @ in [Math.PI/2, Math.PI*3/2] => undefined
+		| otherwise => Math.tan @
 		
 	cot: ->
-		if @ === (Math.PI / 4) or @ === (Math.PI * 5/4)
-			return 1
-		if @ === (Math.PI / 3/4) or @ === (Math.PI * 7/4)
-			return -1
-		if @ === (Math.PI) or @ === 0
-			return undefined
-		Math.cot @
+		| @ in [Math.PI / 4, Math.PI * 5/4] => 1
+		| @ in [Math.PI / 3/4, Math.PI*7/4] => -1
+		| @ in [0 Math.PI] => undefined
+		| otherwise => Math.cot @

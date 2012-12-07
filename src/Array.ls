@@ -178,7 +178,7 @@ Array::<<<
 		while i < len, ++i
 			group.push @[i]
 
-			if ((i + 1) % num) == 0
+			unless (i + 1) % num
 				ret.push group
 				group = []
 

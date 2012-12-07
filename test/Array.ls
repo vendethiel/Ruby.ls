@@ -65,6 +65,9 @@ eq [3 4 5] a.from 2
 
 eq [1 2] a.to 2
 
+#working as intended
+eq undefined []min!
+
 equal 1 a.min!
 
 equal 5 a.max!

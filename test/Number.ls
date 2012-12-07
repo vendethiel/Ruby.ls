@@ -31,3 +31,5 @@ equal 1 (Math.PI / 4)tan!
 equal undefined (Math.PI / 2)tan!
 
 equal undefined (Math.PI)cot!
+
+equal 'Z' 90.chr!

@@ -64,3 +64,5 @@ Number::<<<
 		| @ in [Math.PI / 3/4, Math.PI*7/4] => -1
 		| @ in [0 Math.PI] => undefined
 		| otherwise => Math.cot @
+
+	chr: -> String.from-char-code @

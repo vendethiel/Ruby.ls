@@ -10,15 +10,15 @@ Number::<<<
 	is-integer: -> @ % 1 == 0
 	
 	round: ->
-		mul = 10 ** (it ? 1)
+		mul = 10 ** (it ? 0)
 		Math.round(@ * mul) / mul
 		
 	floor: ->
-		mul = 10 ** (it ? 1)
+		mul = 10 ** (it ? 0)
 		Math.floor(@ * mul) / mul
 	
 	ceil: ->
-		mul = 10 ** (it ? 1)
+		mul = 10 ** (it ? 0)
 		Math.ceil(@ * mul) / mul
 	
 	log: (base) -> ln(@) / (if base then ln base else ln 10)

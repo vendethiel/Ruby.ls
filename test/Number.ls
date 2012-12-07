@@ -1,4 +1,3 @@
-
 i = 0
 3.times -> i += 1
 eq 3 i
@@ -14,6 +13,7 @@ equal false 3.2.is-integer!
 
 equal 3.14 Math.PI.round 2
 equal 3.1415 Math.PI.floor 4
+equal 3 Math.PI.floor!
 equal 3.1416 Math.PI.ceil 4
 
 equal 2 9.log 3

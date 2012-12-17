@@ -167,6 +167,23 @@ Array::<<<
 #	in-groups: (num, fill-with) -> #awfully useless
 
 	in-groups-of: (num, fill-with) ->
+		len = @length
+		i = 0
+		groups = []
+
+		for i to len by num
+			groups.push @[i til i + num]
+
+		if &length > 1
+			last = groups[*-1]
+			if last.length < num
+				i = num - last.length
+				while i, --i
+					last.push fill-with
+
+		groups
+
+		/*
 		ret = []
 		group = []
 		len = @length
@@ -193,6 +210,7 @@ Array::<<<
 			ret.push group
 
 		ret
+		*/
 
 	each-slice: (num, fn) -> @in-groups-of num .each fn
 

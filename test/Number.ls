@@ -28,12 +28,23 @@ equal 1210 100.to-base 4
 equal 1010 10.to-base 2
 
 equal 1 (Math.PI / 4)tan!
-equal undefined (Math.PI / 2)tan!
+equal void (Math.PI / 2)tan!
 
-equal undefined (Math.PI)cot!
+equal void (Math.PI)cot!
 
 equal 'Z' 90.chr!
 
 eq '5 000' 5000.format!
 
 eq '3m' 3_000_000.abbr!
+
+ok 2012.is-leap-year!
+
+ok not 2013.is-leap-year!
+
+equal 1 1.millisecond!
+equal 1000 1.second!
+
+equal 120000 2.minutes!
+
+equal 3024000000 5.week!

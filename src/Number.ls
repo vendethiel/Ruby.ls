@@ -10,7 +10,7 @@ Number::<<<
 	is-integer: -> @ % 1 == 0
 
 	abs: -> Math.abs @
-	
+
 	round: ->
 		mul = 10 ** (it ? 0)
 		Math.round(@ * mul) / mul
@@ -56,13 +56,13 @@ Number::<<<
 	tan: ->
 		| @ in [Math.PI / 4, Math.PI * 5/4] => 1
 		| @ in [Math.PI / 3/4, Math.PI*7/4] => -1
-		| @ in [Math.PI/2, Math.PI*3/2] => undefined
+		| @ in [Math.PI/2, Math.PI*3/2] => void
 		| otherwise => Math.tan @
 		
 	cot: ->
 		| @ in [Math.PI / 4, Math.PI * 5/4] => 1
 		| @ in [Math.PI / 3/4, Math.PI*7/4] => -1
-		| @ in [0 Math.PI] => undefined
+		| @ in [0 Math.PI] => void
 		| otherwise => Math.cot @
 
 	chr: -> String.from-char-code @
@@ -102,7 +102,7 @@ Number::<<<
 		
 		i = Math.max Math.min((significant / 3)floor!, if limit is false then str.length else limit), -mid
 		unit = str.charAt i + mid - 1
-		console.log unit
+
 		if significant < -9 
 			i = -3
 			it = significant.abs! - 9
@@ -110,3 +110,16 @@ Number::<<<
 		
 		divisor = if bytes? then 2 ** (i * 10) else 10 ** (i * 3)
 		return (@ / divisor)round(it || 0)format! + unit.trim!
+
+	is-leap-year: -> @is-multiple-of 4
+
+
+for type, multiplier of do
+	millisecond: -> it
+	second: (                  * 1000)
+	minute: (             * 60 * 1000)
+	hour: (          * 60 * 60 * 1000)
+	day: (      * 24 * 60 * 60 * 1000)
+	week: (* 7 * 24 * 60 * 60 * 1000)
+then let =>
+	Number::"#{type}s" = Number::"#type" = -> multiplier @

@@ -1,4 +1,4 @@
-Sugar.ls
+Ruby.ls
 ========
 
-SugarJS, coded with LiveScript to showcase
+Ruby base object methods, coded with LiveScript to showcase

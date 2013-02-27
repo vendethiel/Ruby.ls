@@ -183,35 +183,6 @@ Array::<<<
 
 		groups
 
-		/*
-		ret = []
-		group = []
-		len = @length
-
-		if len is num
-			return [@]
-
-		i = 0
-		while i < len, ++i
-			group.push @[i]
-
-			unless (i + 1) % num
-				ret.push group
-				group = []
-
-		if group.length
-			if &length > 1
-				#fill
-				add = abs (i % num) - num
-				i = 0
-				while i < add, ++i
-					group.push fill-with
-
-			ret.push group
-
-		ret
-		*/
-
 	each-slice: (num, fn) -> @in-groups-of num .each fn
 
 	rotate: (it = 1) ->
@@ -336,3 +307,18 @@ Array::<<<
 
 
 		result
+
+	# "special methods"
+	\& : -> @intersect ...
+	\* : (it = ',') ->
+		if typeof it is 'string'
+			@join it
+		else
+			[...@] * it
+	\+ : -> @concat it
+	\- : -> @subtract it
+	# destructive
+	\<< : -> @push it; @
+	\<=> : -> # todo
+	\== : -> @ === it
+	'[]' : -> @[it]

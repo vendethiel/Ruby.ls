@@ -140,6 +140,28 @@ eq {2: ['he' 'ya'] 4: ['heya']} <[he ya heya]>group-by 'length'
 eq {13: [age: 15 name: 'Paul'; age: 15 name: 'Marc'] 18: [age: 20 name: 'Pierre']},
 	[{age: 15 name: 'Paul'} {age: 15 name: 'Marc'} {age: 20 name: 'Pierre'}]group-by (.age - 2)
 
+
+# special OPs
+
+eq [1] [1 2]\& [1 3]
+
+eq '1,2' [1 2]'\*'!
+
+eq '1 2' [1 2]\* ' '
+
+eq [1 2 1 2] [1 2]\* 2
+
+eq [1 2 3] [1 2]\+ [3]
+
+eq [1 2] [1 2 3]\- [3]
+
+eq [1 2 3] [1 2]\<< 3
+
+
+ok [1 2]\== [1 2]
+
+eq 1 [1 2]'[]' 0
+
 #using prelude.ls :
 # * any
 # * drop-while

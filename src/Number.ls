@@ -116,10 +116,10 @@ Number::<<<
 
 for type, multiplier of do
 	millisecond: -> it
-	second: (                  * 1000)
-	minute: (             * 60 * 1000)
-	hour: (          * 60 * 60 * 1000)
-	day: (      * 24 * 60 * 60 * 1000)
+	second: (                 * 1000)
+	minute: (            * 60 * 1000)
+	hour: (         * 60 * 60 * 1000)
+	day: (     * 24 * 60 * 60 * 1000)
 	week: (* 7 * 24 * 60 * 60 * 1000)
-then let =>
+then let
 	Number::"#{type}s" = Number::"#type" = -> multiplier @

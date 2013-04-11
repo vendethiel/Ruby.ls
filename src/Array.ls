@@ -313,6 +313,11 @@ Array::<<<
 			return array if it is array.0
 		null
 
+	# destructive
+	clear: ->
+		@length = 0
+		@
+
 	# "special methods"
 	\& : -> @intersect ...
 	\* : (it = ',') ->

@@ -144,6 +144,11 @@ eq [1 2 3] [[7] [5] [3] [1 2 3]]assoc 1
 
 eq null [[1 2 3] [4]]assoc 5
 
+# destructives
+
+ary = [1 to 5]
+eq []
+
 # special OPs
 
 eq [1] [1 2]\& [1 3]

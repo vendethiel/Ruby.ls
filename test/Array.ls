@@ -140,6 +140,9 @@ eq {2: ['he' 'ya'] 4: ['heya']} <[he ya heya]>group-by 'length'
 eq {13: [age: 15 name: 'Paul'; age: 15 name: 'Marc'] 18: [age: 20 name: 'Pierre']},
 	[{age: 15 name: 'Paul'} {age: 15 name: 'Marc'} {age: 20 name: 'Pierre'}]group-by (.age - 2)
 
+eq [1 2 3] [[7] [5] [3] [1 2 3]]assoc 1
+
+eq null [[1 2 3] [4]]assoc 5
 
 # special OPs
 

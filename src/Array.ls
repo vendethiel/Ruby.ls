@@ -308,6 +308,11 @@ Array::<<<
 
 		result
 
+	assoc: ->
+		for array in @
+			return array if it is array.0
+		null
+
 	# "special methods"
 	\& : -> @intersect ...
 	\* : (it = ',') ->

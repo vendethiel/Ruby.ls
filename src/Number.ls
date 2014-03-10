@@ -35,7 +35,7 @@ Number::<<<
 		result = 0
 		remainder = @
 		while remainder > 0
-			power = Math.floor(Math.log(remainder) / Math.log(base))
+			power = Math.floor Math.log(remainder) / Math.log(base)
 			q = base ** power
 			n = Math.floor(remainder / q)
 			result += n * 10 ** power

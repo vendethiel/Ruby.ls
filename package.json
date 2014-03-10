@@ -21,7 +21,7 @@
     "url": "git://github.com/nami-doc/ruby.ls.git"
   },
   "dependencies": {
-    "LiveScript": "~1.1",
+    "LiveScript": "~1.2",
     "prelude-ls": "~0.6",
     "uglify-js": "~2.2",
     "assert": "*"

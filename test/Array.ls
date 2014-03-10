@@ -66,7 +66,7 @@ eq [3 4 5] a.from 2
 eq [1 2] a.to 2
 
 #working as intended
-eq undefined []min!
+eq void []min!
 
 equal 1 a.min!
 
@@ -147,7 +147,7 @@ eq null [[1 2 3] [4]]assoc 5
 # destructives
 
 ary = [1 to 5]
-eq []
+eq [] ary.clear!
 
 # special OPs
 

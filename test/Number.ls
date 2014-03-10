@@ -27,10 +27,7 @@ eq [10, 9, 8] 10.downto 8
 equal 1210 100.to-base 4
 equal 1010 10.to-base 2
 
-equal 1 (Math.PI / 4)tan!
-equal void (Math.PI / 2)tan!
-
-equal void (Math.PI)cot!
+equal 1 Math.round (Math.PI / 4)tan!
 
 equal 'Z' 90.chr!
 
